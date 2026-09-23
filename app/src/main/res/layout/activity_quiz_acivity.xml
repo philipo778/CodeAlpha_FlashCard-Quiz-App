@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_mint_bg"
+    android:clipChildren="false">
+
+    <!-- Top Curved Header Background -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="@color/primary_dark_teal" />
+
+    <!-- Back Button (Top Left) -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Kurudi nyuma"
+        android:src="@drawable/ic_arrow_back"
+        android:scaleType="centerInside"
+        app:tint="@android:color/white" />
+
+    <!-- Header Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp"
+        android:text="FLASHCARDS"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.05" />
+
+    <!-- Central Flashcard -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/flashCard"
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="24dp"
+        android:elevation="6dp"
+        app:cardBackgroundColor="@color/primary_dark_teal"
+        app:cardCornerRadius="16dp">
+
+        <!-- Inner RelativeLayout ili kuweka vitu ndani ya kadi -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnEditCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="0dp"
+                android:contentDescription="Edit Card"
+                android:src="@drawable/ic_edit"
+                app:backgroundTint="@android:color/white"
+                app:elevation="4dp"
+                app:fabSize="mini"
+                app:tint="@color/primary_dark_teal" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnDeleteCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:contentDescription="Delete Card"
+                android:src="@drawable/ic_delete"
+                app:backgroundTint="@android:color/white"
+                app:elevation="4dp"
+                app:fabSize="mini"
+                app:tint="#D32F2F" />
+
+            <TextView
+                android:id="@+id/tvCardContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingHorizontal="16dp"
+                android:text="SWIPE OR NAVIGATE\nTO VIEW FLASHCARDS"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Add Card Button Kijibox (+) - Nusu ndani, nusu nje chini ya kadi -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAddCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/flashCard"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-20dp"
+        android:contentDescription="Add New Card"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@android:color/white"
+        app:elevation="8dp"
+        app:fabSize="mini"
+        app:tint="@color/primary_dark_teal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/flashCard"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <!-- Previous Button -->
+        <Button
+            android:id="@+id/btnPrev"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:backgroundTint="@color/medium_teal"
+            android:padding="4dp"
+            android:text="Prev"
+            android:textColor="@android:color/white"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <!-- Show Answer Button -->
+        <Button
+            android:id="@+id/btnShowAnswer"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="@color/primary_dark_teal"
+            android:padding="0dp"
+            android:text="Show Answer"
+            android:textColor="@android:color/white"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <!-- Next Button -->
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:backgroundTint="@color/medium_teal"
+            android:padding="0dp"
+            android:text="Next &gt;"
+            android:textColor="@android:color/white"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</RelativeLayout>
