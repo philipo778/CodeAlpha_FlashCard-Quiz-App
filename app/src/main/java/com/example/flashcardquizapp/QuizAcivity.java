@@ -13,7 +13,6 @@ import androidx.cardview.widget.CardView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class QuizAcivity extends AppCompatActivity {
@@ -23,6 +22,7 @@ public class QuizAcivity extends AppCompatActivity {
     private FloatingActionButton btnEditCard, btnDeleteCard, btnAddCard;
     private Button btnPrev, btnShowAnswer, btnNext;
 
+    private DatabaseHelper databaseHelper;
     private List<Flashcard> flashcardList;
     private int currentIndex = 0;
     private boolean isShowingAnswer = false;
@@ -44,7 +44,11 @@ public class QuizAcivity extends AppCompatActivity {
         backButton = findViewById(R.id.btnBack);
         flashcard = findViewById(R.id.flashCard);
 
-        loadSampleFlashcards();
+        // Initialize SQLite Database Helper
+        databaseHelper = new DatabaseHelper(this);
+
+        // Load data from SQLite database instead of sample list
+        loadFlashcardsFromDB();
         updateCardDisplay();
 
         backButton.setOnClickListener(v -> {
@@ -77,11 +81,12 @@ public class QuizAcivity extends AppCompatActivity {
             }
         });
 
-        // 1️⃣ Add Button Click
+        // 1️⃣ Add Button Click (Saves to SQLite DB)
         btnAddCard.setOnClickListener(v -> {
             AddCardFragment addDialog = new AddCardFragment();
             addDialog.setOnCardSavedListener((question, answer) -> {
-                flashcardList.add(new Flashcard(question, answer));
+                databaseHelper.addFlashcard(question, answer);
+                loadFlashcardsFromDB();
                 currentIndex = flashcardList.size() - 1; // Jump to the newly added card
                 isShowingAnswer = false;
                 updateCardDisplay();
@@ -89,7 +94,7 @@ public class QuizAcivity extends AppCompatActivity {
             addDialog.show(getSupportFragmentManager(), "AddCardDialog");
         });
 
-        // 2️⃣ Edit Button Click
+        // 2️⃣ Edit Button Click (Updates in SQLite DB)
         btnEditCard.setOnClickListener(v -> {
             if (flashcardList.isEmpty()) {
                 Toast.makeText(QuizAcivity.this, "No cards to edit", Toast.LENGTH_SHORT).show();
@@ -101,22 +106,25 @@ public class QuizAcivity extends AppCompatActivity {
             AddCardFragment editDialog = new AddCardFragment();
             editDialog.setInitialData(currentCard.getQuestion(), currentCard.getAnswer());
             editDialog.setOnCardSavedListener((question, answer) -> {
-                // Update the card at the current index
-                flashcardList.set(currentIndex, new Flashcard(question, answer));
+                databaseHelper.updateFlashcard(currentCard.getId(), question, answer);
+                loadFlashcardsFromDB();
                 isShowingAnswer = false;
                 updateCardDisplay();
             });
             editDialog.show(getSupportFragmentManager(), "EditCardDialog");
         });
 
-        // 3️⃣ Delete Button Click
+        // 3️⃣ Delete Button Click (Removes from SQLite DB)
         btnDeleteCard.setOnClickListener(v -> {
             if (flashcardList.isEmpty()) {
                 Toast.makeText(QuizAcivity.this, "No cards to delete", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            flashcardList.remove(currentIndex);
+            Flashcard currentCard = flashcardList.get(currentIndex);
+            databaseHelper.deleteFlashcard(currentCard.getId());
+
+            loadFlashcardsFromDB();
 
             if (flashcardList.isEmpty()) {
                 tvCardContent.setText("NO FLASHCARDS AVAILABLE\nTAP '+' TO ADD ONE");
@@ -154,11 +162,8 @@ public class QuizAcivity extends AppCompatActivity {
         flipOut.start();
     }
 
-    private void loadSampleFlashcards() {
-        flashcardList = new ArrayList<>();
-        flashcardList.add(new Flashcard("GOOD MORNING", "MAIDIN MHAITH"));
-        flashcardList.add(new Flashcard("THANK YOU", "GO RAIBH MAITH AGAT"));
-        flashcardList.add(new Flashcard("HELLO", "DIA DHUIT"));
+    private void loadFlashcardsFromDB() {
+        flashcardList = databaseHelper.getAllFlashcards();
     }
 
     private void updateCardDisplay() {
@@ -171,24 +176,6 @@ public class QuizAcivity extends AppCompatActivity {
                 tvCardContent.setText(currentCard.getQuestion());
                 btnShowAnswer.setText("Show answer");
             }
-        }
-    }
-
-    private static class Flashcard {
-        private final String question;
-        private final String answer;
-
-        public Flashcard(String question, String answer) {
-            this.question = question;
-            this.answer = answer;
-        }
-
-        public String getQuestion() {
-            return question;
-        }
-
-        public String getAnswer() {
-            return answer;
         }
     }
 }

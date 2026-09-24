@@ -1,23 +1,13 @@
 package com.example.flashcardquizapp;
 
 public class Flashcard {
+    private int id;
     private String question;
     private String answer;
-    private int id;
 
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
+    public Flashcard(int id, String question, String answer) {
+        this.id = id;
         this.question = question;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
         this.answer = answer;
     }
 
@@ -25,13 +15,11 @@ public class Flashcard {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getQuestion() {
+        return question;
     }
 
-    public Flashcard(String question, String answer, int id) {
-        this.question = question;
-        this.answer = answer;
-        this.id = id;
+    public String getAnswer() {
+        return answer;
     }
 }
