@@ -20,4 +20,9 @@ This project is developed as part of the App Development Internship program at *
 To run this project locally on your machine:
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/philipo778/CodeAlpha_FlashcardQuizApp.git]
+   git clone https://github.com/philipo778/CodeAlpha_FlashCard-Quiz-App
+   Open Android Studio.
+
+2. Select Open an Existing Project and choose the cloned project directory.
+
+3. Allow Gradle to sync dependencies, then run the app on an Android Emulator or a physical device.
