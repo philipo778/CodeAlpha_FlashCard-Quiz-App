@@ -36,13 +36,19 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                app:boxStrokeColor="@color/primary_dark_teal"
+                app:boxStrokeWidth="1.5dp"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/primary_dark_teal">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etQuestion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Question"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/darker_gray"
                     android:inputType="textMultiLine"
                     android:minLines="2" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -52,13 +58,19 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp">
+                android:layout_marginBottom="24dp"
+                app:boxStrokeColor="@color/primary_dark_teal"
+                app:boxStrokeWidth="1.5dp"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/primary_dark_teal">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etAnswer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Answer"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/darker_gray"
                     android:inputType="textMultiLine"
                     android:minLines="2" />
             </com.google.android.material.textfield.TextInputLayout>
